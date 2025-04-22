@@ -71,7 +71,7 @@ half::overflow ()
 
     for (int i = 0; i < 10; i++)	
 	f *= f;				// this will overflow before
-					// the for­loop terminates
+					// the forï¿½loop terminates
     return f;
 }
 
@@ -216,95 +216,3 @@ half::convert (int i)
     }
 }
 
-
-//---------------------
-// Stream I/O operators
-//---------------------
-
-HALF_EXPORT ostream &
-operator << (ostream &os, half h)
-{
-    os << float (h);
-    return os;
-}
-
-
-HALF_EXPORT istream &
-operator >> (istream &is, half &h)
-{
-    float f;
-    is >> f;
-    h = half (f);
-    return is;
-}
-
-
-//---------------------------------------
-// Functions to print the bit-layout of
-// floats and halfs, mostly for debugging
-//---------------------------------------
-
-HALF_EXPORT void
-printBits (ostream &os, half h)
-{
-    unsigned short b = h.bits();
-
-    for (int i = 15; i >= 0; i--)
-    {
-	os << (((b >> i) & 1)? '1': '0');
-
-	if (i == 15 || i == 10)
-	    os << ' ';
-    }
-}
-
-
-HALF_EXPORT void
-printBits (ostream &os, float f)
-{
-    half::uif x;
-    x.f = f;
-
-    for (int i = 31; i >= 0; i--)
-    {
-	os << (((x.i >> i) & 1)? '1': '0');
-
-	if (i == 31 || i == 23)
-	    os << ' ';
-    }
-}
-
-
-HALF_EXPORT void
-printBits (char c[19], half h)
-{
-    unsigned short b = h.bits();
-
-    for (int i = 15, j = 0; i >= 0; i--, j++)
-    {
-	c[j] = (((b >> i) & 1)? '1': '0');
-
-	if (i == 15 || i == 10)
-	    c[++j] = ' ';
-    }
-    
-    c[18] = 0;
-}
-
-
-HALF_EXPORT void
-printBits (char c[35], float f)
-{
-    half::uif x;
-    x.f = f;
-
-    for (int i = 31, j = 0; i >= 0; i--, j++)
-    {
-	c[j] = (((x.i >> i) & 1)? '1': '0');
-
-	if (i == 31 || i == 23)
-	    c[++j] = ' ';
-    }
-
-    c[34] = 0;
-}

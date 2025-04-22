@@ -220,26 +220,6 @@ class half
     HALF_EXPORT static const unsigned short   _eLut[1 << 9];
 };
 
-
-
-//-----------
-// Stream I/O
-//-----------
-
-HALF_EXPORT std::ostream &      operator << (std::ostream &os, half  h);
-HALF_EXPORT std::istream &      operator >> (std::istream &is, half &h);
-
-
-//----------
-// Debugging
-//----------
-
-HALF_EXPORT void        printBits   (std::ostream &os, half  h);
-HALF_EXPORT void        printBits   (std::ostream &os, float f);
-HALF_EXPORT void        printBits   (char  c[19], half  h);
-HALF_EXPORT void        printBits   (char  c[35], float f);
-
-
 //-------------------------------------------------------------------------
 // Limits
 //
